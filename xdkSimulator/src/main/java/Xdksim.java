@@ -5,23 +5,12 @@ import java.util.Random;
  */
 public class Xdksim {
 
-    public static float acelerometro;
-    public static float giroscopio;
-    public static float humidade;
-    public static float magnetometro;
-    public static float pressao;
-    public static float temperatura;
-    public static float acustica;
-    public static float luz;
-    public static long lasttimeconsult;
-
-    public static void getacelerometro(){
-        Random r;
-        r = new Random ();
-        float p = r.nextFloat();
+    public static float getacelerometro(){
+        Random r = new Random ();
+        return r.nextInt(20);
     }
 
-    public static void gettemperatura(){
+    public static float gettemperatura(){
         Random r;
         r = new Random();
         temperatura = r.nextInt(30);
@@ -30,7 +19,19 @@ public class Xdksim {
     public static void getacustica(){
         Random r;
         r = new Random();
+        acustica = r.nextInt(20);
+    }
 
+    public static void getluz(){
+        Random r;
+        r = new Random();
+        luz = r.nextInt(20);
+    }
+
+    public static void getpressao(){
+        Random r;
+        r = new Random();
+        pressao = r.nextInt(20);
     }
 
 }
