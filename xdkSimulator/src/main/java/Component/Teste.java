@@ -1,11 +1,10 @@
+package Component;
+
 /**
- * Created by rjaf on 29/09/16.
+ * Created by pedro on 30-09-2016.
  */
-
-
 public class Teste {
-
-    private static int time = 50000;
+    private static int time = 2000;
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -13,10 +12,11 @@ public class Teste {
 
         Client c2 = new Client();
 
+        Xdksim.iniciarXDK();
         while(true){
             Thread.sleep(time);
 
-            float teste = Xdksim.getacelerometro();
+            String teste = Xdksim.getAcelerometro();
 
             c1.displayValue(teste);
 
