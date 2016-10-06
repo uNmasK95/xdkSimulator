@@ -40,7 +40,6 @@ public class Xdksim {
         Random r = new Random();
         String a = "Acelarometro x: "+acelerometro[0]+" y: "+ acelerometro[1] + " z: "+acelerometro[2];
         int qual = r.nextInt(2);
-        System.out.println("qual "+qual);
         if(qual==1) {
             acelerometro[0] += r.nextInt(10);
             acelerometro[1] += r.nextInt(10);

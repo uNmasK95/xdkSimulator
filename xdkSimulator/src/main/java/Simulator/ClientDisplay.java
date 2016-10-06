@@ -5,41 +5,22 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rjaf on 29/09/16.
  */
-public class ClientDisplay {
+public class ClientDisplay{
 
-    private Socket socket;
-    private BufferedReader br;
+    private String name;
 
-    public ClientDisplay(String ip, int port) throws IOException {
-        this.socket = new Socket(ip ,port);
-        this.br = new BufferedReader( new InputStreamReader( socket.getInputStream() ));
-
+    public ClientDisplay(String name) {
+        this.name = name;
     }
 
-    public void statusXDK(){
-        String line;
-        while (socket.isConnected()){
-            try {
-                line = br.readLine();
-                System.out.println((new Date()).getTime() + " ::: "  + line);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    public static void main(String[] args){
-        try {
-            ClientDisplay c1 = new ClientDisplay(args[0], Integer.parseInt(args[1]));
-            c1.statusXDK();
-        } catch (IOException e) {
-            System.out.println("Não foi possivel fazer ligação ao xdk");
-        }
+    public void displayValor(String valor){
+        System.out.println(this.name +" :: "+valor);
     }
 }
