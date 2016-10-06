@@ -12,15 +12,6 @@ import java.util.List;
 /**
  * Created by rjaf on 29/09/16.
  */
-public class ClientDisplay{
-
-    private String name;
-
-    public ClientDisplay(String name) {
-        this.name = name;
-    }
-
-    public void displayValor(String valor){
-        System.out.println(this.name +" :: "+valor);
-    }
+public interface ClientDisplay{
+    public void displayValor(String valor);
 }

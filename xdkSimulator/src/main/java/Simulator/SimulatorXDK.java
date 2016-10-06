@@ -27,14 +27,14 @@ public class SimulatorXDK {
 
 
     public SimulatorXDK() throws IOException, InterruptedException {
-        accelerometer = new ThreadSensor("accelemeter",1000);
+        accelerometer = new ThreadSensor("accelerometer",1000);
         gyroscope = new ThreadSensor("gyroscope",1000);
-        magnetometer = new ThreadSensor("gyroscope",1000);
-        humidity = new ThreadSensor("gyroscope",1000);
-        pressure = new ThreadSensor("gyroscope",1000);
-        temperature = new ThreadSensor("gyroscope",5000);
-        acoustic = new ThreadSensor("gyroscope",1000);
-        light = new ThreadSensor("gyroscope",1000);
+        magnetometer = new ThreadSensor("magnetometer",1000);
+        humidity = new ThreadSensor("humidity",1000);
+        pressure = new ThreadSensor("pressure",1000);
+        temperature = new ThreadSensor("temperature",5000);
+        acoustic = new ThreadSensor("acoustic",1000);
+        light = new ThreadSensor("light",1000);
 
         this.accelerometer.start();
         this.gyroscope.start();
@@ -48,7 +48,7 @@ public class SimulatorXDK {
 
     public void addCLiente( ClientDisplay c , String sensor){
         switch (sensor){
-            case "accelemeter" : {
+            case "accelerometer" : {
                 accelerometer.addClient( c );
                 break;
             }
