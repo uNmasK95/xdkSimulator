@@ -22,3 +22,4 @@ hs_err_pid*
 # Maven
 log/
 target/
+xdkSimulator/.idea/workspace.xml
