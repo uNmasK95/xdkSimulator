@@ -12,7 +12,6 @@ public class Teste {
 
         Client c2 = new Client();
 
-        Xdksim.iniciarXDK();
         while(true){
             Thread.sleep(time);
 

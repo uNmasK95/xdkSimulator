@@ -37,7 +37,17 @@ public class SimulatorXDK {
             try {
                 socket = sSocket.accept();
                 try {
-                    this.accelerometer.addClient(new BufferedWriter(new OutputStreamWriter( socket.getOutputStream())));
+                    BufferedReader br = new BufferedReader(new InputStreamReader( socket.getInputStream()));
+                    String line = br.readLine();
+                    switch (line){
+                        case "accelerometer" : {
+                            this.accelerometer.addClient(new BufferedWriter(new OutputStreamWriter( socket.getOutputStream())));
+                        }
+                        case "temperatura" : {
+
+                        }
+
+                    }
                 } catch (IOException e) {
                     System.out.println("Não foi possivel iniciar a comunicação com o cliente");
                 }

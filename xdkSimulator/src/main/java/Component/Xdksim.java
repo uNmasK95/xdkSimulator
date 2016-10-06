@@ -15,9 +15,10 @@ public class Xdksim {
     private static float luz;
     private static float pressao;
     private static float humidade;
+    private static boolean iniciarXDK = false;
 
 
-    public static void iniciarXDK(){
+    private static void iniciarXDK(){
         Random r = new Random();
         acelerometro = new float[3];
         acelerometro[0]= r.nextInt(200)+100;
@@ -33,6 +34,9 @@ public class Xdksim {
     }
 
     public static String getAcelerometro(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         Random r = new Random();
         String a = "Acelarometro x: "+acelerometro[0]+" y: "+ acelerometro[1] + " z: "+acelerometro[2];
         int qual = r.nextInt(2);
@@ -51,6 +55,9 @@ public class Xdksim {
     }
 
     public static String getGiroscopio(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Giroscopio: "+ giroscopio;
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -64,6 +71,9 @@ public class Xdksim {
     }
 
     public static String getMagnetometro(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Magnetometro: "+ magnetometro+" mg";
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -77,6 +87,9 @@ public class Xdksim {
     }
 
     public static String getTemperatura(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Temperatura: "+ temperatura+" ºC";
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -90,6 +103,9 @@ public class Xdksim {
     }
 
     public static String getAcustica(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Acustica: "+ acustica+" dB";
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -106,6 +122,9 @@ public class Xdksim {
     }
 
     public static String getLuz(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Luz: "+ luz+" %";
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -125,6 +144,9 @@ public class Xdksim {
     }
 
     public static String getPresao(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Pressao: "+ pressao+" pa";
         Random r = new Random();
         int qual = r.nextInt(2);
@@ -141,6 +163,9 @@ public class Xdksim {
     }
 
     public static String getHumidade(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         String a = "Humidade: "+ humidade+" %";
         Random r = new Random();
         int qual = r.nextInt(2);
