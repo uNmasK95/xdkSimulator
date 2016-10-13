@@ -1,6 +1,7 @@
 package Simulator;
 
 
+import Component.Client;
 import Component.Xdksim;
 
 import java.io.*;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by rjaf on 29/09/16.
  */
-public class SimulatorXDK {
+public class SimulatorXDK implements xdk{
 
     private ThreadSensor accelerometer;
     private ThreadSensor gyroscope;
@@ -48,35 +49,35 @@ public class SimulatorXDK {
 
     public void addCLiente( ClientDisplay c , String sensor){
         switch (sensor){
-            case "accelerometer" : {
+            case xdk.accelerometer : {
                 accelerometer.addClient( c );
                 break;
             }
-            case "gyroscope" : {
+            case xdk.gyroscope : {
                 gyroscope.addClient( c );
                 break;
             }
-            case "magnetometer" : {
+            case xdk.magnetometer : {
                 magnetometer.addClient( c );
                 break;
             }
-            case "humidity" : {
+            case xdk.humidity : {
                 humidity.addClient( c );
                 break;
             }
-            case "pressure" : {
+            case xdk.pressure : {
                 pressure.addClient( c );
                 break;
             }
-            case "temperature" : {
+            case xdk.temperature : {
                 temperature.addClient( c );
                 break;
             }
-            case "acoustic" : {
+            case xdk.acoustic : {
                 acoustic.addClient( c );
                 break;
             }
-            case "light" : {
+            case xdk.light : {
                 light.addClient( c );
                 break;
             }
@@ -86,6 +87,17 @@ public class SimulatorXDK {
         }
     }
 
+    @Override
+    public void removeCliente(ClientDisplay c) {
+        this.accelerometer.removeClient( c );
+        this.gyroscope.removeClient(c);
+        this.magnetometer.removeClient(c);
+        this.humidity.removeClient(c);
+        this.pressure.removeClient(c);
+        this.temperature.removeClient(c);
+        this.acoustic.removeClient(c);
+        this.light.removeClient(c);
+    }
 
 
     class ThreadSensor extends Thread{
@@ -106,44 +118,47 @@ public class SimulatorXDK {
             this.listClients.add( cd );
         }
 
+        public void removeClient(ClientDisplay cd){
+            this.listClients.remove( cd );
+        }
+
         @Override
         public void run() {
 
             while(true){
                 try {
-
                     Thread.sleep(timeStamp);
                     String valor = null;
                     switch (tipo){
-                        case "accelerometer" : {
+                        case xdk.accelerometer : {
                             valor = Xdksim.getAcelerometro();
                             break;
                         }
-                        case "gyroscope" : {
+                        case xdk.gyroscope : {
                             valor = Xdksim.getGiroscopio();
                             break;
                         }
-                        case "magnetometer" : {
+                        case xdk.magnetometer : {
                             valor = Xdksim.getMagnetometro();
                             break;
                         }
-                        case "humidity" : {
+                        case xdk.humidity : {
                             valor = Xdksim.getHumidade();
                             break;
                         }
-                        case "pressure" : {
+                        case xdk.pressure : {
                             valor = Xdksim.getPresao();
                             break;
                         }
-                        case "temperature" : {
+                        case xdk.temperature : {
                             valor = Xdksim.getTemperatura();
                             break;
                         }
-                        case "acoustic" : {
+                        case xdk.acoustic : {
                             valor = Xdksim.getAcustica();
                             break;
                         }
-                        case "light" : {
+                        case xdk.light : {
                             valor = Xdksim.getLuz();
                             break;
                         }
