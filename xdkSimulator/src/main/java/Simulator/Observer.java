@@ -12,6 +12,6 @@ import java.util.List;
 /**
  * Created by rjaf on 29/09/16.
  */
-public interface ClientDisplay{
-    public void displayValor(String valor);
+public interface Observer{
+    public void update(String valor);
 }

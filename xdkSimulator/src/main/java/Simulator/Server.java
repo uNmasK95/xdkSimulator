@@ -8,14 +8,27 @@ import java.io.IOException;
 public class Server {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        SimulatorXDK xdk = new SimulatorXDK();
-        xdk.addCLiente( new Mostrador("pedro") , "accelerometer");
-        xdk.addCLiente( new Mostrador("rui") , "gyroscope");
-        xdk.addCLiente( new BDInercial() , "magnetometer");
-        xdk.addCLiente( new BDInercial() , "humidity");
-        xdk.addCLiente( new Mostrador("madalena") , "pressure");
-        xdk.addCLiente( new Mostrador("leandro") , "temperature");
-        xdk.addCLiente( new BDInercial() , "acoustic");
-        xdk.addCLiente( new BDInercial() , "light");
+
+        ConcreteSubject xdkA = new ConcreteSubject("accelerometer",1000);
+        ConcreteSubject xdkT = new ConcreteSubject("temperature",5000);
+
+        xdkA.start();
+        xdkT.start();
+
+        MostradorObserver mo = new MostradorObserver("pedro");
+
+        xdkA.registerObserver( mo  );
+        xdkT.registerObserver( mo );
+
+        BDInercialObserver bd = new BDInercialObserver();
+
+        xdkA.registerObserver( bd );
+        xdkT.registerObserver( bd );
+
+
+
+
+
+
     }
 }
