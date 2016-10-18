@@ -13,5 +13,5 @@ import java.util.List;
  * Created by rjaf on 29/09/16.
  */
 public interface Observer{
-    public void update(String valor);
+    public void update( Subject s);
 }

@@ -10,6 +10,8 @@ import java.util.List;
  */
 public class ConcreteSubject implements Subject{
 
+
+
     private int timeStamp;
     private String tipo;
     private List<Observer> listObservers;
@@ -32,12 +34,12 @@ public class ConcreteSubject implements Subject{
     }
 
     @Override
-    public void notifyObservers( String valor ) {
+    public void notifyObservers( ) {
         for( Observer clientDisplay : listObservers ) {
-            clientDisplay.update( valor );
+            clientDisplay.update( this );
         }
     }
-
+/*
     public void start(){
         while(true){
             try {
@@ -79,12 +81,12 @@ public class ConcreteSubject implements Subject{
 
                 }
 
-                notifyObservers( valor );
+                notifyObservers( );
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
 }

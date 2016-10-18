@@ -9,24 +9,36 @@ public class Server {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-        ConcreteSubject xdkA = new ConcreteSubject("accelerometer",1000);
-        ConcreteSubject xdkT = new ConcreteSubject("temperature",5000);
 
-        xdkA.start();
-        xdkT.start();
+        AccelerometerXDK acc = new AccelerometerXDK(1000);
 
-        MostradorObserver mo = new MostradorObserver("pedro");
+        MostradorObserver mo1 = new MostradorObserver();
 
-        xdkA.registerObserver( mo  );
-        xdkT.registerObserver( mo );
 
-        BDInercialObserver bd = new BDInercialObserver();
-
-        xdkA.registerObserver( bd );
-        xdkT.registerObserver( bd );
+        acc.registerObserver( mo1 );
 
 
 
+
+
+        TemperatureXDK temp = new TemperatureXDK(5000);
+
+        BDInercialObserver bdio = new BDInercialObserver();
+
+        temp.registerObserver(bdio);
+        temp.registerObserver(mo1);
+
+
+        NoiseXDK n = new NoiseXDK(15000);
+        NoiseXDK n1 = new NoiseXDK(5000);
+        NoiseMonitor nm = new NoiseMonitor();
+
+        n.registerObserver( nm );
+        n1.registerObserver( nm );
+        n1.start();
+        n.start();
+        acc.start();
+        temp.start();
 
 
 

@@ -8,7 +8,6 @@ import java.util.Random;
 public class Xdksim {
 
     private static float[] acelerometro;
-    private static float giroscopio;
     private static float magnetometro;
     private static float temperatura;
     private static float acustica;
@@ -24,7 +23,6 @@ public class Xdksim {
         acelerometro[0]= r.nextInt(200)+100;
         acelerometro[1]= r.nextInt(200)+100;
         acelerometro[2]= r.nextInt(50)+50;
-        giroscopio = r.nextInt(360);
         magnetometro = r.nextInt(175)+50; //mg
         temperatura = r.nextInt(20)+10; // ºC
         acustica = r.nextInt(40)+10;//db
@@ -33,79 +31,77 @@ public class Xdksim {
         humidade = r.nextInt(100); // %
     }
 
-    public static String getAcelerometro(){
+    public static float[] getAcelerometro(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
         Random r = new Random();
-        String a = "Acelarometro x: "+acelerometro[0]+" y: "+ acelerometro[1] + " z: "+acelerometro[2];
         int qual = r.nextInt(2);
         if(qual==1) {
-            acelerometro[0] += r.nextInt(10);
-            acelerometro[1] += r.nextInt(10);
-            acelerometro[2] += r.nextInt(2);
+            acelerometro[0] += r.nextInt(10) + r.nextFloat();
+            acelerometro[1] += r.nextInt(10) + r.nextFloat();
+            acelerometro[2] += r.nextInt(2) + r.nextFloat();
         }
         else {
-            acelerometro[0] -= r.nextInt(10);
-            acelerometro[1] -= r.nextInt(10);
-            acelerometro[2] -= r.nextInt(2);
+            acelerometro[0] -= r.nextInt(10) + r.nextFloat();
+            acelerometro[1] -= r.nextInt(10) + r.nextFloat();
+            acelerometro[2] -= r.nextInt(2) + r.nextFloat();
         }
-        return a;
+
+        float teste[] = new float[3];
+        teste[0] = acelerometro[0];
+        teste[1] = acelerometro[1];
+        teste[2] = acelerometro[2];
+        return teste;
     }
 
-    public static String getGiroscopio(){
+    public static float getGiroscopio(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Giroscopio: "+ giroscopio;
+        Random r = new Random();
+        int qual = r.nextInt(2);
+        float giroscopio = r.nextInt(360);
+        if(qual==1) {
+            giroscopio = -1 * giroscopio;
+        }
+        return giroscopio;
+    }
+
+    public static float getMagnetometro(){
+        if(!iniciarXDK) {
+            iniciarXDK(); iniciarXDK = true;
+        }
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
-            giroscopio += r.nextInt(5);
+            magnetometro += r.nextInt(5) + r.nextFloat();
         }
         else{
-            giroscopio -= r.nextInt(5);
+            magnetometro -= r.nextInt(5) + r.nextFloat();
         }
-        return a;
+        return magnetometro;
     }
 
-    public static String getMagnetometro(){
+    public static float getTemperatura(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Magnetometro: "+ magnetometro+" mg";
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
-            magnetometro += r.nextInt(5);
+            temperatura += r.nextInt(5) + r.nextFloat();
         }
         else{
-            magnetometro -= r.nextInt(5);
+            temperatura -= r.nextInt(5) + r.nextFloat();
         }
-        return a;
+        return temperatura;
     }
 
-    public static String getTemperatura(){
+    public static float getAcustica(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Temperatura: "+ temperatura+" ºC";
-        Random r = new Random();
-        int qual = r.nextInt(2);
-        if(qual==1) {
-            temperatura += r.nextInt(5);
-        }
-        else{
-            temperatura -= r.nextInt(5);
-        }
-        return a;
-    }
-
-    public static String getAcustica(){
-        if(!iniciarXDK) {
-            iniciarXDK(); iniciarXDK = true;
-        }
-        String a = "Acustica: "+ acustica+" dB";
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
@@ -113,18 +109,17 @@ public class Xdksim {
         }
         else{
             acustica -= r.nextInt(5);
-            if(acustica < 0){
+            if(acustica <= 0){
                 acustica += 5;
             }
         }
-        return a;
+        return acustica;
     }
 
-    public static String getLuz(){
+    public static float getLuz(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Luz: "+ luz+" %";
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
@@ -139,33 +134,31 @@ public class Xdksim {
                 luz += 5;
             }
         }
-        return a;
+        return luz;
     }
 
-    public static String getPresao(){
+    public static float getPresao(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Pressao: "+ pressao+" pa";
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
-            pressao += r.nextInt(5);
+            pressao += r.nextInt(5) + r.nextFloat();
         }
         else{
-            pressao -= r.nextInt(5);
+            pressao -= r.nextInt(5) + r.nextFloat();
             if(luz <= 0){
                 pressao += 5;
             }
         }
-        return a;
+        return pressao;
     }
 
-    public static String getHumidade(){
+    public static float getHumidade(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
         }
-        String a = "Humidade: "+ humidade+" %";
         Random r = new Random();
         int qual = r.nextInt(2);
         if(qual==1) {
@@ -180,6 +173,6 @@ public class Xdksim {
                 humidade += 5;
             }
         }
-        return a;
+        return humidade;
     }
 }

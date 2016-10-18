@@ -8,14 +8,16 @@ import java.util.List;
  */
 public class BDInercialObserver implements Observer{
 
-    private List<String> bd;
+    //temperatura
+    private List<Float> bd;
 
     public BDInercialObserver() {
+
         this.bd = new ArrayList<>();
     }
 
     @Override
-    public void update(String valor) {
-        bd.add(valor);
+    public void update( Subject s ) {
+        bd.add( ((TemperatureXDK) s).getState() );
     }
 }
