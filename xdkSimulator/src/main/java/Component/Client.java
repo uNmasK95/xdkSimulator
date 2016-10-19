@@ -7,8 +7,8 @@ public class Client {
     public Client() {
     }
 
-    public void displayValue(String valeu){
-        System.out.println(valeu);
+    public void displayValue(float[] valeu){
+        System.out.println( "x=" + valeu[0] + " y=" + valeu[1] + " z=" + valeu[2] );
     }
 
 }

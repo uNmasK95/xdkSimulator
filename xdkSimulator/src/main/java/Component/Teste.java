@@ -14,12 +14,12 @@ public class Teste {
 
         while(true){
             Thread.sleep(time);
-/*
-            String teste = Xdksim.getAcelerometro();
+
+            float[] teste = Xdksim.getAcelerometro();
 
             c1.displayValue(teste);
 
-            c2.displayValue(teste);*/
+            c2.displayValue(teste);
 
         }
     }

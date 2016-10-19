@@ -1,4 +1,6 @@
-package Simulator;
+package Simulator.teste;
+
+import Simulator.*;
 
 import java.io.IOException;
 
@@ -35,10 +37,7 @@ public class Server {
 
         n.registerObserver( nm );
         n1.registerObserver( nm );
-        n1.start();
-        n.start();
-        acc.start();
-        temp.start();
+
 
 
 

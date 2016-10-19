@@ -22,6 +22,8 @@ public class NoiseXDK implements Subject{
         this.timeStamp = time;
         listObservers = new ArrayList<>();
         this.lastValue = 0;
+
+        start();
     }
 
     @Override
@@ -41,7 +43,7 @@ public class NoiseXDK implements Subject{
         }
     }
 
-    public void start() {
+    private void start() {
 
         Thread c = new Thread( new Runnable() {
             @Override

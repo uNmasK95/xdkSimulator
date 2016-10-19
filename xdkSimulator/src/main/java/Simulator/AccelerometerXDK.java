@@ -21,6 +21,8 @@ public class AccelerometerXDK implements Subject {
         this.id = ID; ID++;
         this.timeStamp = time;
         listObservers = new ArrayList<>();
+
+        start();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class AccelerometerXDK implements Subject {
         }
     }
 
-    public void start(){
+    private void start(){
 
 
         Thread c = new Thread( new Runnable() {
