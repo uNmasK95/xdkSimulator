@@ -1,29 +1,18 @@
 package Simulator.teste;
 
-import Simulator.*;
+
+import Simulator.NoiseMonitor;
+import Simulator.NoiseXDK;
 
 import java.io.IOException;
 
 /**
  * Created by rjaf on 19/10/2016.
  */
-public class Server {
+public class Teste4 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
 
-
-        AccelerometerXDK acc = new AccelerometerXDK(1000);
-
-        MostradorObserver mo1 = new MostradorObserver();
-
-        acc.registerObserver( mo1 );
-
-        TemperatureXDK temp = new TemperatureXDK(5000);
-
-        BDInercialObserver bdio = new BDInercialObserver();
-
-        temp.registerObserver(bdio);
-        temp.registerObserver(mo1);
 
         NoiseXDK n1 = new NoiseXDK(15000);
         NoiseXDK n2 = new NoiseXDK(10000);
@@ -34,5 +23,9 @@ public class Server {
         n1.registerObserver( nm );
         n2.registerObserver( nm );
         n3.registerObserver( nm );
+
+
+
+
     }
 }
