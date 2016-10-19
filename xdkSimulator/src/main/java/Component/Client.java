@@ -7,8 +7,12 @@ public class Client {
     public Client() {
     }
 
-    public void displayValue(float[] valeu){
-        System.out.println( "x=" + valeu[0] + " y=" + valeu[1] + " z=" + valeu[2] );
+    public void displayValue(float[] value){
+        System.out.println( "x=" + value[0] + " y=" + value[1] + " z=" + value[2] );
+    }
+
+    public void displayValue(float value){
+        System.out.println( value );
     }
 
 }
