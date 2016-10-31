@@ -1,3 +1,5 @@
+package main;
+
 import java.util.Random;
 
 /**
@@ -118,6 +120,7 @@ public class Xdksim {
     public static float getLuz(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
+            luz = 50;
         }
         Random r = new Random();
         int qual = r.nextInt(2);

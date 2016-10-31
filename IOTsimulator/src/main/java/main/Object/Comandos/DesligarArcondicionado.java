@@ -1,3 +1,6 @@
+package main.Object.Comandos;
+
+import main.Object.*;
 /**
  * Created by rjaf on 27/10/2016.
  */
