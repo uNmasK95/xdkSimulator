@@ -86,7 +86,7 @@ public class Xdksim {
     public static float getTemperatura(){
         if(!iniciarXDK) {
             iniciarXDK(); iniciarXDK = true;
-            temperatura = 26;
+            temperatura = 30;
         }
         Random r = new Random();
         int qual = r.nextInt(2);

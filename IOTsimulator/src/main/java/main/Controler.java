@@ -7,8 +7,8 @@ import main.Object.Atuador;
  */
 public interface Controler {
 
-    public void registerAtenuador(CondicaoAtuador ca );
-    public void removeAtenuar(CondicaoAtuador ca );
+    public void registerAtuador(CondicaoAtuador ca );
+    public void removeAtuador(CondicaoAtuador ca );
     public void executeComand(Subject s);
 
 }
