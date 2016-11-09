@@ -15,7 +15,7 @@ public class ControlerAtuador implements Observer,Controler {
 
     public ControlerAtuador() {
         this.listCondAtuador = new ArrayList<>();
-        this.relogio = new Relogio( Thread.currentThread() );
+        this.relogio = new Relogio();
         new Thread(this.relogio).start();
     }
 
@@ -47,13 +47,11 @@ public class ControlerAtuador implements Observer,Controler {
 
     public class Relogio implements Runnable {
 
-        private Thread main;
         private int hora;
         private int minuto;
 
 
-        public Relogio(Thread father) {
-            this.main = father;
+        public Relogio() {
             this.hora = 0;
             this.minuto = 0;
         }
@@ -74,6 +72,9 @@ public class ControlerAtuador implements Observer,Controler {
                     if(this.minuto >= 60){
                         this.hora++;
                         this.minuto = 0;
+                    }
+                    if(this.hora >= 24){
+                        this.hora = 0;
                     }
                     System.out.println(this.hora + ":" + this.minuto);
                 } catch (InterruptedException e) {
