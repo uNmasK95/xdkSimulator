@@ -16,6 +16,7 @@ public class WeatherStation implements WeatherObserver {
      * Registos de luminosidade
      * */
 
+
     HashMap<LocalDate,Vector<Integer>> temperatura;
     HashMap<LocalDate,Vector<Integer>> humidade;
     HashMap<LocalDate,Vector<Integer>> pressao_atm;
@@ -50,7 +51,6 @@ public class WeatherStation implements WeatherObserver {
 
                 if (this.temperatura.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
                     val_temp.add(values.elementAt(0));
                 } else
                 {
@@ -60,7 +60,6 @@ public class WeatherStation implements WeatherObserver {
                 }
                 if (this.humidade.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = humidade.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
                     val_temp.add(values.elementAt(1));
                 } else
                 {
@@ -71,7 +70,6 @@ public class WeatherStation implements WeatherObserver {
 
                 if (this.pressao_atm.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
                     val_temp.add(values.elementAt(2));
                 } else
                 {
@@ -82,7 +80,6 @@ public class WeatherStation implements WeatherObserver {
 
                 if (this.audio.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = audio.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
                     val_temp.add(values.elementAt(3));
                 } else
                 {
@@ -92,7 +89,6 @@ public class WeatherStation implements WeatherObserver {
                 }
                 if (this.luminosidade.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-                    Iterator<Integer> iterator = values.iterator();
                     val_temp.add(values.elementAt(4));
                 } else
                 {
@@ -114,49 +110,49 @@ public class WeatherStation implements WeatherObserver {
      * Funcionalidade: Mostrar os valores mais recentes dos sensores
      * @return print da temperatura
      */
-    public void mostra_temperatura(){
+    public String mostra_temperatura(){
         int i = -100;
         if (temperatura.containsKey(LocalDate.now())){
             int size = this.temperatura.get(LocalDate.now()).size();
             i = this.temperatura.get(LocalDate.now()).elementAt(size-1);
         }
-        System.out.println("Tempertura Actual: " + i);
+        return "Tempertura Actual: " + i;
     }
 
-    public void mostra_humidade(){
+    public String mostra_humidade(){
         int value = -100;
         if (humidade.containsKey(LocalDate.now())){
             int size = this.humidade.get(LocalDate.now()).size();
             value = this.humidade.get(LocalDate.now()).elementAt(size-1);
         }
-        System.out.println("Humidade Actual: " + value);
+        return "Humidade Actual: " + value;
     }
 
-    public void mostra_presao_atm(){
+    public String mostra_presao_atm(){
         int value = -100;
         if (pressao_atm.containsKey(LocalDate.now())){
             int size = this.pressao_atm.get(LocalDate.now()).size();
             value = this.pressao_atm.get(LocalDate.now()).elementAt(size-1);
         }
-        System.out.println("pressao atmosférica actual: " + value);
+        return "pressao atmosférica actual: " + value;
     }
 
-    public void mostra_audio(){
+    public String mostra_audio(){
         int value = -100;
         if (audio.containsKey(LocalDate.now())){
             int size = this.audio.get(LocalDate.now()).size();
             value = this.audio.get(LocalDate.now()).elementAt(size-1);
         }
-        System.out.println("Audio actual: " + value);
+        return "Audio actual: " + value;
     }
 
-    public void mostra_luminusidade(){
+    public String mostra_luminusidade(){
         int value = -100;
         if (luminosidade.containsKey(LocalDate.now())){
             int size = this.luminosidade.get(LocalDate.now()).size();
             value = this.luminosidade.get(LocalDate.now()).elementAt(size-1);
         }
-        System.out.println("Audio actual: " + value);
+        return "Luminosidade actual: " + value;
     }
 
     /**
@@ -164,7 +160,7 @@ public class WeatherStation implements WeatherObserver {
      * @param data dia a considerar para a média
      * @param sensor sensor a calcular: 0 temperatura
      */
-    public void mostra_media(LocalDate data, int sensor){
+    public String mostra_media(LocalDate data, int sensor){
 
         switch (sensor) {
             case 0: //temperatura
@@ -175,7 +171,7 @@ public class WeatherStation implements WeatherObserver {
                         sum += val;
                     }
 
-                    System.out.println("Média temperatura: " + sum/this.temperatura.get(data).size());
+                    return "Média temperatura: " + sum/this.temperatura.get(data).size();
                 }
                 break;
             case 1: //temperatura
@@ -186,10 +182,11 @@ public class WeatherStation implements WeatherObserver {
                         sum += val;
                     }
 
-                    System.out.println("Média humidade: " + sum/this.humidade.get(data).size());
+                    return "Média humidade: " + sum/this.humidade.get(data).size();
                 }
                 break;
         }
+        return null;
     }
 
     /**
@@ -197,7 +194,7 @@ public class WeatherStation implements WeatherObserver {
      * @param data dia a considerar para recolher o valor máximo e minímo
      * @param sensor valor do sensor a recolher: temperatura, humidade, pressão atm, audio, luminosidade
      */
-    public void  mostra_max_minimo(LocalDate data, int sensor){
+    public String  mostra_max_minimo(LocalDate data, int sensor){
 
         switch (sensor) {
             case 0: //temperatura
@@ -205,7 +202,7 @@ public class WeatherStation implements WeatherObserver {
                 Vector<Integer> v = this.temperatura.get(data);
                     int max = Collections.max(v);
                     int min = Collections.min(v);
-                    System.out.println("Max temperatura: "+max+" Min temperatura: "+min);
+                    return "Max temperatura: "+max+" Min temperatura: "+min;
                 }
                 break;
             case 1: //humidade
@@ -213,7 +210,7 @@ public class WeatherStation implements WeatherObserver {
                     Vector<Integer> v = this.humidade.get(data);
                     int max = Collections.max(v);
                     int min = Collections.min(v);
-                    System.out.println("Max humidade: "+max+" Min humidade: "+min);
+                    return "Max humidade: "+max+" Min humidade: "+min;
                 }
                 break;
             case 2: //pressão atmosférica
@@ -221,7 +218,7 @@ public class WeatherStation implements WeatherObserver {
                     Vector<Integer> v = this.pressao_atm.get(data);
                     int max = Collections.max(v);
                     int min = Collections.min(v);
-                    System.out.println("Max pressão atmosférica: "+max+" Min pressão atmosférica: "+min);
+                    return "Max pressão atmosférica: "+max+" Min pressão atmosférica: "+min;
                 }
                 break;
             case 3: //audio
@@ -229,7 +226,7 @@ public class WeatherStation implements WeatherObserver {
                     Vector<Integer> v = this.audio.get(data);
                     int max = Collections.max(v);
                     int min = Collections.min(v);
-                    System.out.println("Max Audio: "+max+" Min Audio: "+min);
+                    return "Max Audio: "+max+" Min Audio: "+min;
                 }
                 break;
             case 4: //luminosidade
@@ -237,12 +234,13 @@ public class WeatherStation implements WeatherObserver {
                     Vector<Integer> v = this.luminosidade.get(data);
                     int max = Collections.max(v);
                     int min = Collections.min(v);
-                    System.out.println("Max Luminosidade: "+max+" Min Luminosidade: "+min);
+                    return "Max Luminosidade: "+max+" Min Luminosidade: "+min;
                 }
                 break;
             default:
                 break;
         }
+        return null;
     }
 
     /**
@@ -250,7 +248,7 @@ public class WeatherStation implements WeatherObserver {
      * @param sensor sensor a mostrar
      * @param dias numero de dias a considerar desde a leitura mais actual.
      */
-    public void mostra_ultimos_dias(int sensor, int dias) {
+    public String mostra_ultimos_dias(int sensor, int dias) {
 
         int dias_counter = dias-1;
         HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<LocalDate, Vector<Integer>>();
@@ -271,13 +269,13 @@ public class WeatherStation implements WeatherObserver {
                 }
                 break;
         }
-        System.out.println("Valores máximos e mínimos: "+last_values.toString());
+        return "Valores máximos e mínimos: "+last_values.toString();
     }
 
 
     public static void main(String args[]) {
-
         // Create a hash map
+
         Vector<Integer> xdk1_reading_1= new Vector<>();
         xdk1_reading_1.add(23);
         xdk1_reading_1.add(2);
@@ -294,8 +292,8 @@ public class WeatherStation implements WeatherObserver {
 
         WeatherStation iot = new WeatherStation();
         // simular a recepção de valores
-        iot.update(1, xdk1_reading_1);
-        iot.update(1, xdk1_reading_2);
+       // iot.update(1, xdk1_reading_1);
+        //iot.update(1, xdk1_reading_2);
 
         // Views
         iot.mostra_temperatura();
