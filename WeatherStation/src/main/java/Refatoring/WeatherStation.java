@@ -1,3 +1,5 @@
+package Refatoring;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -34,7 +36,7 @@ public class WeatherStation implements WeatherObserver {
 
     /**
      * A estção meteriologica recebe updates dos sensores e armazena os valores na estrutura de dados respectiva.
-     * @param id identificador do sensor XDK
+     * @param id identificador do sensor Refatoring.XDK
      * @param values parametros lidos pelo sensor
      *               posição 0 : temperatura
      *               posição 1 : humidade
@@ -47,7 +49,7 @@ public class WeatherStation implements WeatherObserver {
     public void update(int id, Vector<Integer> values){
 
         switch (id) {
-            case 1: // XDK exterior
+            case 1: // Refatoring.XDK exterior
 
                 if (this.temperatura.get(LocalDate.now()) != null){
                     Vector<Integer> val_temp = temperatura.get(LocalDate.now());
@@ -97,7 +99,7 @@ public class WeatherStation implements WeatherObserver {
                     luminosidade.put(LocalDate.now(), new_vector);
                 }
                 break;
-            case 2: // XDK interior
+            case 2: // Refatoring.XDK interior
                 ;
                 break;
             default:

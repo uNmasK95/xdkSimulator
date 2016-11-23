@@ -1,3 +1,5 @@
+package Refatoring;
+
 import java.util.Vector;
 
 /**
@@ -7,7 +9,7 @@ public class XDK {
 
     private WeatherObserver weatherObserver;
 
-    public XDK (WeatherObserver c, Vector<Integer> v,int id) {
+    public XDK (WeatherObserver c, Vector<Integer> v, int id) {
         this.weatherObserver = c;
         start(id,v);
     }
