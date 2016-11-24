@@ -50,54 +50,7 @@ public class WeatherStation implements WeatherObserver {
 
         switch (id) {
             case 1: // Refatoring.XDK exterior
-
-                if (this.temperatura.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-                    val_temp.add(values.elementAt(0));
-                } else
-                {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
-                    new_vector.add(values.elementAt(0));
-                    temperatura.put(LocalDate.now(), new_vector);
-                }
-                if (this.humidade.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = humidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(1));
-                } else
-                {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
-                    new_vector.add(values.elementAt(1));
-                    humidade.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.pressao_atm.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-                    val_temp.add(values.elementAt(2));
-                } else
-                {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
-                    new_vector.add(values.elementAt(2));
-                    pressao_atm.put(LocalDate.now(), new_vector);
-                }
-
-                if (this.audio.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = audio.get(LocalDate.now());
-                    val_temp.add(values.elementAt(3));
-                } else
-                {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
-                    new_vector.add(values.elementAt(3));
-                    audio.put(LocalDate.now(), new_vector);
-                }
-                if (this.luminosidade.get(LocalDate.now()) != null){
-                    Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-                    val_temp.add(values.elementAt(4));
-                } else
-                {
-                    Vector<Integer> new_vector  =  new Vector<Integer>();
-                    new_vector.add(values.elementAt(4));
-                    luminosidade.put(LocalDate.now(), new_vector);
-                }
+                updateXDKexterior(values);
                 break;
             case 2: // Refatoring.XDK interior
                 ;
@@ -109,52 +62,112 @@ public class WeatherStation implements WeatherObserver {
     }
 
     /**
+     * A estção meteriologica recebe updates dos sensores e armazena os valores na estrutura de dados respectiva.
+     * @param values parametros lidos pelo sensor
+     *               posição 0 : temperatura
+     *               posição 1 : humidade
+     *               posição 2 : pressão atmosféria
+     *               posição 3 : audio
+     *               posição 4 : luminosidade
+     *
+     */
+    public void updateXDKexterior(Vector<Integer> values){
+
+         if (this.temperatura.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = temperatura.get(LocalDate.now());
+            val_temp.add(values.elementAt(0));
+        } else
+        {
+            Vector<Integer> new_vector  =  new Vector<Integer>();
+            new_vector.add(values.elementAt(0));
+            temperatura.put(LocalDate.now(), new_vector);
+        }
+                    if (this.humidade.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = humidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(1));
+        } else
+        {
+            Vector<Integer> new_vector  =  new Vector<Integer>();
+            new_vector.add(values.elementAt(1));
+            humidade.put(LocalDate.now(), new_vector);
+        }
+
+                    if (this.pressao_atm.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
+            val_temp.add(values.elementAt(2));
+        } else
+        {
+            Vector<Integer> new_vector  =  new Vector<Integer>();
+            new_vector.add(values.elementAt(2));
+            pressao_atm.put(LocalDate.now(), new_vector);
+        }
+
+                    if (this.audio.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = audio.get(LocalDate.now());
+            val_temp.add(values.elementAt(3));
+        } else
+        {
+            Vector<Integer> new_vector  =  new Vector<Integer>();
+            new_vector.add(values.elementAt(3));
+            audio.put(LocalDate.now(), new_vector);
+        }
+                    if (this.luminosidade.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
+            val_temp.add(values.elementAt(4));
+        } else
+        {
+            Vector<Integer> new_vector  =  new Vector<Integer>();
+            new_vector.add(values.elementAt(4));
+            luminosidade.put(LocalDate.now(), new_vector);
+        }
+    }
+    /**
      * Funcionalidade: Mostrar os valores mais recentes dos sensores
      * @return print da temperatura
      */
-    public String mostra_temperatura(){
+    public int mostra_temperatura(){
         int i = -100;
         if (temperatura.containsKey(LocalDate.now())){
             int size = this.temperatura.get(LocalDate.now()).size();
             i = this.temperatura.get(LocalDate.now()).elementAt(size-1);
         }
-        return "Tempertura Actual: " + i;
+        return i;
     }
 
-    public String mostra_humidade(){
+    public int mostra_humidade(){
         int value = -100;
         if (humidade.containsKey(LocalDate.now())){
             int size = this.humidade.get(LocalDate.now()).size();
             value = this.humidade.get(LocalDate.now()).elementAt(size-1);
         }
-        return "Humidade Actual: " + value;
+        return value;
     }
 
-    public String mostra_presao_atm(){
+    public int mostra_presao_atm(){
         int value = -100;
         if (pressao_atm.containsKey(LocalDate.now())){
             int size = this.pressao_atm.get(LocalDate.now()).size();
             value = this.pressao_atm.get(LocalDate.now()).elementAt(size-1);
         }
-        return "pressao atmosférica actual: " + value;
+        return value;
     }
 
-    public String mostra_audio(){
+    public int  mostra_audio(){
         int value = -100;
         if (audio.containsKey(LocalDate.now())){
             int size = this.audio.get(LocalDate.now()).size();
             value = this.audio.get(LocalDate.now()).elementAt(size-1);
         }
-        return "Audio actual: " + value;
+        return value;
     }
 
-    public String mostra_luminusidade(){
+    public int mostra_luminusidade(){
         int value = -100;
         if (luminosidade.containsKey(LocalDate.now())){
             int size = this.luminosidade.get(LocalDate.now()).size();
             value = this.luminosidade.get(LocalDate.now()).elementAt(size-1);
         }
-        return "Luminosidade actual: " + value;
+        return value;
     }
 
     /**

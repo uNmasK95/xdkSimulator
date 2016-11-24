@@ -15,24 +15,23 @@ public class VisualizeView {
     }
 
     public void mostra_temperatura() {
-        System.out.println(station.mostra_temperatura());
+        System.out.println("Tempertura Actual: " + station.mostra_temperatura());
     }
 
     public void mostra_humidade() {
-        System.out.println(station.mostra_humidade());
+        System.out.println("Humidade Actual: " + station.mostra_humidade());
     }
 
     public void mostra_presao_atm() {
-        System.out.println(station.mostra_presao_atm());
+        System.out.println("pressao atmosférica actual: " + station.mostra_presao_atm());
     }
 
     public void mostra_audio() {
-
-        System.out.println(station.mostra_audio());
+        System.out.println("Audio actual: " + station.mostra_audio());
     }
 
     public void mostra_luminusidade() {
-        System.out.println(station.mostra_humidade());
+        System.out.println( "Luminosidade actual: " + station.mostra_humidade());
     }
 
     public void mostra_media(LocalDate data, int sensor) {
