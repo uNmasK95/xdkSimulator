@@ -1,4 +1,5 @@
 import Refatoring.WeatherStation;
+import Refatoring.WeatherView;
 import Refatoring.XDK;
 import org.junit.Test;
 import org.junit.runners.Parameterized;
@@ -90,26 +91,8 @@ public class WeatherStationTeste {
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
 
-        // assert statements
-        assertEquals(22, iot.mostra_temperatura());
-        assertEquals("Max temperatura: 23 Min temperatura: 22" , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idTemperatura) );
-        assertEquals("Max humidade: 24 Min humidade: 2"  , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idHumidade) );
-        assertEquals("Max pressão atmosférica: 3 Min pressão atmosférica: 3", iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idPressao_atm) );
+        WeatherView view = new WeatherView(iot);
 
-        assertEquals("Max Audio: 54 Min Audio: 4" , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idAudio) );
-
-        assertEquals("Max Luminosidade: 32 Min Luminosidade: 5"  , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idLuminosidade));
-        assertEquals( 3 , iot.mostra_presao_atm());
-        assertEquals( 24, iot.mostra_humidade());
-
-        assertEquals( "Média temperatura: 22", iot.mostra_media(LocalDate.now(),0));
-
-        Vector max_min_values = new Vector();
-        max_min_values.add(23);
-        max_min_values.add(22);
-        last_values.put(LocalDate.now(),max_min_values);
-
-        assertEquals(last_values , iot.mostra_ultimos_dias(0,2));
 
     }
 }
