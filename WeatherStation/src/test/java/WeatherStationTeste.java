@@ -1,4 +1,3 @@
-import Original.WeatherStationO;
 import Refatoring.WeatherStation;
 import org.junit.Test;
 
