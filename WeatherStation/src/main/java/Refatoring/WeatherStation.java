@@ -146,7 +146,7 @@ public class WeatherStation implements WeatherObserver {
         return null;
     }
 
-    private float mostra_media_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
+    private int mostra_media_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
         int sum = 0;
         for (Integer val : sensor_historico.get(data)) {
             sum += val;
@@ -173,7 +173,7 @@ public class WeatherStation implements WeatherObserver {
                 break;
             case idPressao_atm: //pressão atmosférica
                 if ( false != this.pressao_atm.containsKey(data)){
-                    return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,this.pressao_atm)[0]+" Min pressão atmosférica: "+mostra_max_minimo_generico(data,this.temperatura)[1];
+                    return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,this.pressao_atm)[0]+" Min pressão atmosférica: "+mostra_max_minimo_generico(data,this.pressao_atm)[1];
                 }
                 break;
             case idAudio: //audio
@@ -183,7 +183,7 @@ public class WeatherStation implements WeatherObserver {
                 break;
             case idLuminosidade: //luminosidade
                 if ( false != this.luminosidade.containsKey(data)){
-                    return "Max Luminosidade: "+mostra_max_minimo_generico(data,this.luminosidade)[0]+" Min Luminosidade: "+mostra_max_minimo_generico(data,this.temperatura)[1];
+                    return "Max Luminosidade: "+mostra_max_minimo_generico(data,this.luminosidade)[0]+" Min Luminosidade: "+mostra_max_minimo_generico(data,this.luminosidade)[1];
                 }
                 break;
             default:
