@@ -5,12 +5,12 @@ import java.time.LocalDate;
 /**
  * Created by pedro on 17-11-2016.
  */
-public class VisualizeView {
+public class WeatherView {
 
 
     private WeatherStation station;
 
-    public VisualizeView (WeatherStation w){
+    public WeatherView(WeatherStation w){
         this.station = w;
     }
 
@@ -31,14 +31,22 @@ public class VisualizeView {
     }
 
     public void mostra_luminusidade() {
-        System.out.println( "Luminosidade actual: " + station.mostra_humidade());
+        System.out.println( "Luminosidade actual: " + station.mostra_luminusidade());
     }
 
     public void mostra_media(LocalDate data, int sensor) {
-        System.out.println(station.mostra_media(data,sensor));
+        if(station.mostra_media(data,sensor)!=null) {
+            System.out.println(station.mostra_media(data, sensor));
+        }
     }
 
     public void mostra_max_minimo(LocalDate data, int sensor) {
-        System.out.println(station.mostra_max_minimo(data,sensor));
+        if(station.mostra_max_minimo(data,sensor) != null) {
+            System.out.println(station.mostra_max_minimo(data, sensor));
+        }
+    }
+
+    public void mostra_ultimos_dias(int sensor, int dias){
+        System.out.println("Valores máximos e mínimos: "+station.mostra_ultimos_dias(sensor,dias).toString());
     }
 }

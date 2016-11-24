@@ -8,13 +8,14 @@ import java.util.Vector;
 public class XDK {
 
     private WeatherObserver weatherObserver;
+    private int id;
 
-    public XDK (WeatherObserver c, Vector<Integer> v, int id) {
+    public XDK (WeatherObserver c, int id) {
         this.weatherObserver = c;
-        start(id,v);
+        this.id = id;
     }
 
-    public void start (Integer id, Vector<Integer> v){
-        this.weatherObserver.update(1, v);
+    public void start (Vector<Integer> v){
+        this.weatherObserver.update(this.id, v);
     }
 }
