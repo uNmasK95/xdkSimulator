@@ -8,6 +8,11 @@ import java.util.*;
  */
 public class WeatherStation implements WeatherObserver {
 
+    public static int idTemperatura = 0;
+    public static int idHumidade = 1;
+    public static int idPressao_atm = 2;
+    public static int idAudio = 3;
+    public static int idLuminosidade = 4;
 
     /**  Data objects
      *
@@ -17,7 +22,6 @@ public class WeatherStation implements WeatherObserver {
      * Registos de audio
      * Registos de luminosidade
      * */
-
 
     HashMap<LocalDate,Vector<Integer>> temperatura;
     HashMap<LocalDate,Vector<Integer>> humidade;
@@ -48,126 +52,64 @@ public class WeatherStation implements WeatherObserver {
     @Override
     public void update(int id, Vector<Integer> values){
 
-        switch (id) {
-            case 1: // Refatoring.XDK exterior
-                updateXDKexterior(values);
-                break;
-            case 2: // Refatoring.XDK interior
-                ;
-                break;
-            default:
-                // ignore ;
-                break;
+        if(id == 1) {
+
+            updateXDKsensor(values.elementAt(idTemperatura), this.temperatura);
+
+            updateXDKsensor(values.elementAt(idHumidade), this.humidade);
+
+            updateXDKsensor(values.elementAt(idPressao_atm), this.pressao_atm);
+
+            updateXDKsensor(values.elementAt(idAudio), this.audio);
+
+            updateXDKsensor(values.elementAt(idLuminosidade), this.luminosidade);
         }
     }
 
-    /**
-     * A estção meteriologica recebe updates dos sensores e armazena os valores na estrutura de dados respectiva.
-     * @param values parametros lidos pelo sensor
-     *               posição 0 : temperatura
-     *               posição 1 : humidade
-     *               posição 2 : pressão atmosféria
-     *               posição 3 : audio
-     *               posição 4 : luminosidade
-     *
-     */
-    public void updateXDKexterior(Vector<Integer> values){
-
-         if (this.temperatura.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = temperatura.get(LocalDate.now());
-            val_temp.add(values.elementAt(0));
+    private void updateXDKsensor(Integer value, HashMap<LocalDate,Vector<Integer>> sensor_historico ){
+        if (sensor_historico.get(LocalDate.now()) != null){
+            Vector<Integer> val_temp = sensor_historico.get(LocalDate.now());
+            val_temp.add(value);
         } else
         {
             Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(values.elementAt(0));
-            temperatura.put(LocalDate.now(), new_vector);
-        }
-                    if (this.humidade.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = humidade.get(LocalDate.now());
-            val_temp.add(values.elementAt(1));
-        } else
-        {
-            Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(values.elementAt(1));
-            humidade.put(LocalDate.now(), new_vector);
-        }
-
-                    if (this.pressao_atm.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = pressao_atm.get(LocalDate.now());
-            val_temp.add(values.elementAt(2));
-        } else
-        {
-            Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(values.elementAt(2));
-            pressao_atm.put(LocalDate.now(), new_vector);
-        }
-
-                    if (this.audio.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = audio.get(LocalDate.now());
-            val_temp.add(values.elementAt(3));
-        } else
-        {
-            Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(values.elementAt(3));
-            audio.put(LocalDate.now(), new_vector);
-        }
-                    if (this.luminosidade.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = luminosidade.get(LocalDate.now());
-            val_temp.add(values.elementAt(4));
-        } else
-        {
-            Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(values.elementAt(4));
-            luminosidade.put(LocalDate.now(), new_vector);
+            new_vector.add(value);
+            sensor_historico.put(LocalDate.now(), new_vector);
         }
     }
+
     /**
      * Funcionalidade: Mostrar os valores mais recentes dos sensores
      * @return print da temperatura
      */
-    public int mostra_temperatura(){
+
+    private int mostrar(HashMap<LocalDate,Vector<Integer>> sensor_historico){
         int i = -100;
-        if (temperatura.containsKey(LocalDate.now())){
-            int size = this.temperatura.get(LocalDate.now()).size();
-            i = this.temperatura.get(LocalDate.now()).elementAt(size-1);
+        if (sensor_historico.containsKey(LocalDate.now())){
+            int size = sensor_historico.get(LocalDate.now()).size();
+            i = sensor_historico.get(LocalDate.now()).elementAt(size-1);
         }
         return i;
     }
 
+    public int mostra_temperatura(){
+        return mostrar(this.temperatura);
+    }
+
     public int mostra_humidade(){
-        int value = -100;
-        if (humidade.containsKey(LocalDate.now())){
-            int size = this.humidade.get(LocalDate.now()).size();
-            value = this.humidade.get(LocalDate.now()).elementAt(size-1);
-        }
-        return value;
+        return mostrar(this.humidade);
     }
 
     public int mostra_presao_atm(){
-        int value = -100;
-        if (pressao_atm.containsKey(LocalDate.now())){
-            int size = this.pressao_atm.get(LocalDate.now()).size();
-            value = this.pressao_atm.get(LocalDate.now()).elementAt(size-1);
-        }
-        return value;
+        return mostrar(this.pressao_atm);
     }
 
     public int  mostra_audio(){
-        int value = -100;
-        if (audio.containsKey(LocalDate.now())){
-            int size = this.audio.get(LocalDate.now()).size();
-            value = this.audio.get(LocalDate.now()).elementAt(size-1);
-        }
-        return value;
+        return mostrar(this.audio);
     }
 
     public int mostra_luminusidade(){
-        int value = -100;
-        if (luminosidade.containsKey(LocalDate.now())){
-            int size = this.luminosidade.get(LocalDate.now()).size();
-            value = this.luminosidade.get(LocalDate.now()).elementAt(size-1);
-        }
-        return value;
+        return mostrar(this.luminosidade);
     }
 
     /**
