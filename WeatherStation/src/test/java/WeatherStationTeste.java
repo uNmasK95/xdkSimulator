@@ -1,3 +1,4 @@
+import Refatoring.WeatherModel;
 import Refatoring.WeatherStation;
 import Refatoring.WeatherView;
 import Refatoring.XDK;
@@ -48,13 +49,13 @@ public class WeatherStationTeste {
 
         // assert statements
         assertEquals(22, iot.mostra_temperatura());
-        assertEquals("Max temperatura: 23 Min temperatura: 22" , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idTemperatura) );
-        assertEquals("Max humidade: 24 Min humidade: 2"  , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idHumidade) );
-        assertEquals("Max pressão atmosférica: 3 Min pressão atmosférica: 3", iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idPressao_atm) );
+        assertEquals("Max temperatura: 23 Min temperatura: 22" , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura) );
+        assertEquals("Max humidade: 24 Min humidade: 2"  , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade) );
+        assertEquals("Max pressão atmosférica: 3 Min pressão atmosférica: 3", iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm) );
 
-        assertEquals("Max Audio: 54 Min Audio: 4" , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idAudio) );
+        assertEquals("Max Audio: 54 Min Audio: 4" , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio) );
 
-        assertEquals("Max Luminosidade: 32 Min Luminosidade: 5"  , iot.mostra_max_minimo(LocalDate.now(), WeatherStation.idLuminosidade));
+        assertEquals("Max Luminosidade: 32 Min Luminosidade: 5"  , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade));
         assertEquals( 3 , iot.mostra_presao_atm());
         assertEquals( 24, iot.mostra_humidade());
 

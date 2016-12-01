@@ -34,15 +34,15 @@ public class Teste {
         WeatherView view  = new WeatherView(iot);
 
         view.print_mostra_temperatura();
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherStation.idTemperatura);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherStation.idHumidade);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherStation.idPressao_atm);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherStation.idAudio);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherStation.idLuminosidade);
+        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura);
+        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
+        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
+        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
+        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
         view.print_mostra_presao_atm();
         view.print_mostra_humidade();
-        view.print_mostra_media(LocalDate.now(),WeatherStation.idTemperatura);
-        view.print_mostra_ultimos_dias(WeatherStation.idTemperatura,2);
+        view.print_mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
+        view.print_mostra_ultimos_dias(WeatherModel.idTemperatura,2);
 
     }
 }

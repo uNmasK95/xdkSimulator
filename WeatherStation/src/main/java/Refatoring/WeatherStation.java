@@ -9,12 +9,6 @@ import java.util.*;
 public class WeatherStation implements WeatherObserver {
 
 
-    public static final int idTemperatura = 0;
-    public static final int idHumidade = 1;
-    public static final int idPressao_atm = 2;
-    public static final int idAudio = 3;
-    public static final int idLuminosidade = 4;
-
     WeatherModel weatherModel;
 
     public WeatherStation() {
@@ -81,9 +75,9 @@ public class WeatherStation implements WeatherObserver {
 
     public String mostra_media(LocalDate data, int sensor){
         switch (sensor) {
-            case idTemperatura:
+            case WeatherModel.idTemperatura:
                 return mostra_media_temperatura(data);
-            case idHumidade:
+            case WeatherModel.idHumidade:
                 return mostra_media_humidade(data);
         }
         return null;
@@ -118,27 +112,27 @@ public class WeatherStation implements WeatherObserver {
      */
     public String  mostra_max_minimo(LocalDate data, int sensor){
         switch (sensor) {
-            case idTemperatura: //temperatura
+            case WeatherModel.idTemperatura: //temperatura
                 if ( false != weatherModel.getTemperatura().containsKey(data)){
                     return "Max temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[0] +" Min temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[1];
                 }
                 break;
-            case idHumidade: //humidade
+            case WeatherModel.idHumidade: //humidade
                 if ( false != weatherModel.getHumidade().containsKey(data)){
                     return "Max humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[0]+" Min humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[1];
                 }
                 break;
-            case idPressao_atm: //pressão atmosférica
+            case WeatherModel.idPressao_atm: //pressão atmosférica
                 if ( false != weatherModel.getPressao_atm().containsKey(data)){
                     return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[0]+" Min pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[1];
                 }
                 break;
-            case idAudio: //audio
+            case WeatherModel.idAudio: //audio
                 if ( false != weatherModel.getAudio().containsKey(data)){
                     return "Max Audio: "+ mostra_max_minimo_generico(data,weatherModel.getAudio())[0] +" Min Audio: "+mostra_max_minimo_generico(data,weatherModel.getAudio())[1];
                 }
                 break;
-            case idLuminosidade: //luminosidade
+            case WeatherModel.idLuminosidade: //luminosidade
                 if ( false !=  weatherModel.getLuminosidade().containsKey(data)){
                     return "Max Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[0]+" Min Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[1];
                 }
@@ -167,7 +161,7 @@ public class WeatherStation implements WeatherObserver {
         HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<LocalDate, Vector<Integer>>();
         Vector max_min_values = new Vector();
 
-        if(sensor==idTemperatura){
+        if(sensor==WeatherModel.idTemperatura){
             LocalDate today = LocalDate.now();
             while (dias_counter >= 0) {
 
