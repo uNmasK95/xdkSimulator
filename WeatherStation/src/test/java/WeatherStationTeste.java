@@ -47,7 +47,12 @@ public class WeatherStationTeste {
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
 
+        WeatherView view = new WeatherView();
+
         // assert statements
+
+        assertEquals("Tempertura Actual: 22",iot.mostra_temperatura());
+
         assertEquals(22, iot.mostra_temperatura());
         assertEquals("Max temperatura: 23 Min temperatura: 22" , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura) );
         assertEquals("Max humidade: 24 Min humidade: 2"  , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade) );
@@ -67,6 +72,7 @@ public class WeatherStationTeste {
         last_values.put(LocalDate.now(),max_min_values);
 
         assertEquals(last_values , iot.mostra_ultimos_dias(0,2));
+
 
     }
 
@@ -91,8 +97,6 @@ public class WeatherStationTeste {
 
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
-
-        WeatherView view = new WeatherView(iot);
 
 
     }

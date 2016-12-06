@@ -31,18 +31,18 @@ public class Teste {
         xdk1.start(xdk1_reading_2);
 
         // Views
-        WeatherView view  = new WeatherView(iot);
 
-        view.print_mostra_temperatura();
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
-        view.print_mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
-        view.print_mostra_presao_atm();
-        view.print_mostra_humidade();
-        view.print_mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
-        view.print_mostra_ultimos_dias(WeatherModel.idTemperatura,2);
+        iot.mostra_temperatura();
+        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura);
+        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
+        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
+        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
+        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
+        iot.mostra_presao_atm();
+        iot.mostra_humidade();
+        iot.mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
+        iot.mostra_ultimos_dias(WeatherModel.idTemperatura,2);
 
     }
+
 }
