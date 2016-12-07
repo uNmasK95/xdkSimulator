@@ -40,11 +40,13 @@ public class Server {
         xdk1_reading_2.add(4);
         xdk1_reading_2.add(5);
 
-        WeatherStation ws = new WeatherStation();
-        XDK xdk1 = new XDK(ws,1);
+        WeatherModel wModel = new WeatherModel();
+
+        WeatherStation wStation = new WeatherStation(wModel);
+        XDK xdk1 = new XDK(wStation,1);
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
 
-        Server s = new Server(12345,ws);
+        Server s = new Server(12345,wStation);
     }
 }
