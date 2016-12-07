@@ -24,24 +24,29 @@ public class Teste {
         xdk1_reading_2.add(4);
         xdk1_reading_2.add(5);
 
-        WeatherStation iot = new WeatherStation();
-        XDK xdk1 = new XDK(iot,1);
+        //Model
+        WeatherModel wm = new WeatherModel();
 
+        //Controller
+        WeatherStation iot = new WeatherStation(wm);
+
+        // XDK
+        XDK xdk1 = new XDK(iot,1);
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
 
         // Views
-
-        iot.mostra_temperatura();
-        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura);
-        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
-        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
-        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
-        iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
-        iot.mostra_presao_atm();
-        iot.mostra_humidade();
-        iot.mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
-        iot.mostra_ultimos_dias(WeatherModel.idTemperatura,2);
+        WeatherView wv = new WeatherView(iot);
+        wv.mostra_temperatura();
+        wv.mostra_max_minimo(LocalDate.now(), WeatherModel.idTemperatura);
+        wv.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
+        wv.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
+        wv.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
+        wv.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
+        wv.mostra_presao_atm();
+        wv.mostra_humidade();
+        wv.mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
+        wv.mostra_ultimos_dias(WeatherModel.idTemperatura,2);
 
     }
 

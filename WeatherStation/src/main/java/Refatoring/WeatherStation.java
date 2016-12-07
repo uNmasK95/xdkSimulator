@@ -8,13 +8,10 @@ import java.util.*;
  */
 public class WeatherStation implements WeatherObserver {
 
-
     private WeatherModel weatherModel;
-    private WeatherView weatherView;
 
-    public WeatherStation() {
-        weatherModel = new WeatherModel();
-        weatherView = new WeatherView();
+    public WeatherStation(WeatherModel weatherModel) {
+        this.weatherModel = weatherModel;
     }
 
     /**
@@ -33,7 +30,6 @@ public class WeatherStation implements WeatherObserver {
        weatherModel.update(id,values);
     }
 
-
     /**
      * Funcionalidade: retornar o último valor do sensor_historico do dia atual.
      * @param sensor_historico
@@ -49,24 +45,25 @@ public class WeatherStation implements WeatherObserver {
         return i;
     }
 
-    public void mostra_temperatura(){
-        weatherView.print_mostra_temperatura(mostrar(weatherModel.getTemperatura()));
+    public String mostra_temperatura(){
+        return  "Tempertura Actual: " + mostrar(weatherModel.getTemperatura());
     }
 
-    public void mostra_humidade(){
-        weatherView.print_mostra_humidade(mostrar(weatherModel.getHumidade()));
+    public String mostra_humidade(){
+        return "Humidade Actual: " + mostrar(weatherModel.getHumidade());
     }
 
-    public void mostra_presao_atm(){
-        weatherView.print_mostra_presao_atm(mostrar(weatherModel.getPressao_atm()));
+    public String mostra_presao_atm(){
+        return "pressao atmosférica actual: " + mostrar(weatherModel.getPressao_atm());
     }
 
-    public void mostra_audio(){
-        weatherView.print_mostra_audio(mostrar(weatherModel.getAudio()));
+    public String mostra_audio(){
+
+        return "Audio actual: " + mostrar(weatherModel.getAudio());
     }
 
-    public void mostra_luminusidade(){
-        weatherView.print_mostra_luminusidade(mostrar(weatherModel.getLuminosidade()));
+    public String mostra_luminusidade(){
+        return "Luminosidade actual: " + mostrar(weatherModel.getLuminosidade());
     }
 
     /**
@@ -74,28 +71,28 @@ public class WeatherStation implements WeatherObserver {
      * @param data dia a considerar para a média
      * @param sensor sensor a calcular: 0 temperatura
      */
-
-    public void mostra_media(LocalDate data, int sensor){
+    public String mostra_media(LocalDate data, int sensor){
         switch (sensor) {
             case WeatherModel.idTemperatura:
-                weatherView.print_mostra_media(mostra_media_temperatura(data));
+                return mostra_media_temperatura(data);
             case WeatherModel.idHumidade:
-                weatherView.print_mostra_media(mostra_media_humidade(data));
+                return mostra_media_humidade(data);
         }
+        return "";
     }
 
     private String mostra_media_temperatura(LocalDate data){
         if (false != weatherModel.getTemperatura().containsKey(data)) {
             return "Média temperatura: " + mostra_media_generico(data, weatherModel.getTemperatura());
         }
-        return null;
+        return "";
     }
 
     private String mostra_media_humidade(LocalDate data){
         if (false != weatherModel.getHumidade().containsKey(data)) {
             return "Média humidade: " + mostra_media_generico(data, weatherModel.getHumidade());
         }
-        return null;
+        return "";
     }
 
     private int mostra_media_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
@@ -111,36 +108,45 @@ public class WeatherStation implements WeatherObserver {
      * @param data dia a considerar para recolher o valor máximo e minímo
      * @param sensor valor do sensor a recolher: temperatura, humidade, pressão atm, audio, luminosidade
      */
-    public void  mostra_max_minimo(LocalDate data, int sensor){
+    public String  mostra_max_minimo(LocalDate data, int sensor){
+        final int MAX = 0;
+        final int MIN = 1;
+
         switch (sensor) {
             case WeatherModel.idTemperatura: //temperatura
                 if ( false != weatherModel.getTemperatura().containsKey(data)){
-                    weatherView.print_mostra_max_minimo("Max temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[0] +" Min temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[1]);
+                    return "Max temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[MAX] +
+                            " Min temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[MIN];
                 }
                 break;
             case WeatherModel.idHumidade: //humidade
                 if ( false != weatherModel.getHumidade().containsKey(data)){
-                    weatherView.print_mostra_max_minimo("Max humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[0]+" Min humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[1]);
+                    return "Max humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[MAX]+
+                            " Min humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[MIN];
                 }
                 break;
             case WeatherModel.idPressao_atm: //pressão atmosférica
                 if ( false != weatherModel.getPressao_atm().containsKey(data)){
-                    weatherView.print_mostra_max_minimo("Max pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[0]+" Min pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[1]);
+                    return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[MAX]+
+                            " Min pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[MIN];
                 }
                 break;
             case WeatherModel.idAudio: //audio
                 if ( false != weatherModel.getAudio().containsKey(data)){
-                    weatherView.print_mostra_max_minimo("Max Audio: "+ mostra_max_minimo_generico(data,weatherModel.getAudio())[0] +" Min Audio: "+mostra_max_minimo_generico(data,weatherModel.getAudio())[1]);
+                    return "Max Audio: "+ mostra_max_minimo_generico(data,weatherModel.getAudio())[MAX] +
+                            " Min Audio: "+mostra_max_minimo_generico(data,weatherModel.getAudio())[MIN];
                 }
                 break;
             case WeatherModel.idLuminosidade: //luminosidade
                 if ( false !=  weatherModel.getLuminosidade().containsKey(data)){
-                    weatherView.print_mostra_max_minimo("Max Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[0]+" Min Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[1]);
+                    return "Max Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[MAX]+
+                            " Min Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[MIN];
                 }
                 break;
             default:
                 break;
         }
+        return "";
     }
 
     private Integer[] mostra_max_minimo_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
@@ -155,7 +161,7 @@ public class WeatherStation implements WeatherObserver {
      * @param sensor sensor a mostrar
      * @param dias numero de dias a considerar desde a leitura mais actual.
      */
-    public void mostra_ultimos_dias(int sensor, int dias) {
+    public String mostra_ultimos_dias(int sensor, int dias) {
 
         int dias_counter = dias-1;
         HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<LocalDate, Vector<Integer>>();
@@ -175,6 +181,6 @@ public class WeatherStation implements WeatherObserver {
                 dias_counter -= 1;
             }
         }
-        weatherView.print_mostra_ultimos_dias(last_values.toString());
+        return "Valores máximos e mínimos: " + last_values.toString();
     }
 }
