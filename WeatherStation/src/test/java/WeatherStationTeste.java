@@ -74,9 +74,21 @@ public class WeatherStationTeste {
 
 
     @Test
-    public void mostraTeste(){
+    public void mostra_temperaturaTeste(){
         wView.mostra_temperatura();
         assertEquals("Tempertura Actual: 22\n",outContent.toString());
+    }
+
+    @Test
+    public void mostra_presao_atmTeste(){
+        wView.mostra_presao_atm();
+        assertEquals("pressao atmosférica actual: 3\n"  , outContent.toString());
+    }
+
+    @Test
+    public void mostra_humidadeTeste(){
+        wView.mostra_humidade();
+        assertEquals("Humidade Actual: 24\n"  , outContent.toString());
     }
 
     @Test
@@ -85,36 +97,40 @@ public class WeatherStationTeste {
         assertEquals("Max temperatura: 23 Min temperatura: 22\n" , outContent.toString());
     }
 
-/*
+    @Test
+    public void mostra_max_minimo_humidadeTeste(){
+        wView.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade);
+        assertEquals("Max humidade: 24 Min humidade: 2\n"  , outContent.toString() );
+    }
 
     @Test
-    public void xdkTesteReading() {
+    public void mostra_max_minimo_pressãoTeste(){
+        wView.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm);
+        assertEquals("Max pressão atmosférica: 3 Min pressão atmosférica: 3\n", outContent.toString() );
+    }
 
-        WeatherStation iot = new WeatherStation();
-        XDK xdk1 = new XDK(iot,1);
+    @Test
+    public void mostra_max_minimo_audioTeste(){
+        wView.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio);
+        assertEquals("Max Audio: 54 Min Audio: 4\n", outContent.toString() );
+    }
 
-        xdk1.start(xdk1_reading_1);
-        xdk1.start(xdk1_reading_2);
+    @Test
+    public void mostra_max_minimo_luminosidadeTeste(){
+        wView.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade);
+        assertEquals("Max Luminosidade: 32 Min Luminosidade: 5\n"  , outContent.toString());
+    }
 
+    @Test
+    public void mostra_mediaTeste(){
+        wView.mostra_media(LocalDate.now(),0);
+        assertEquals( "Média temperatura: 22\n", outContent.toString() );
+    }
 
+    @Test
+    public void mostra_ultimos_dias(){
+        wView.mostra_ultimos_dias(0,2);
+        assertEquals("Valores máximos e mínimos: {2016-12-07=[23, 22]}\n" , outContent.toString() );
+    }
 
-        assertEquals("Max humidade: 24 Min humidade: 2"  , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idHumidade) );
-        assertEquals("Max pressão atmosférica: 3 Min pressão atmosférica: 3", iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idPressao_atm) );
-
-        assertEquals("Max Audio: 54 Min Audio: 4" , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idAudio) );
-
-        assertEquals("Max Luminosidade: 32 Min Luminosidade: 5"  , iot.mostra_max_minimo(LocalDate.now(), WeatherModel.idLuminosidade));
-        assertEquals( 3 , iot.mostra_presao_atm());
-        assertEquals( 24, iot.mostra_humidade());
-
-        assertEquals( "Média temperatura: 22", iot.mostra_media(LocalDate.now(),0));
-
-        Vector max_min_values = new Vector();
-        max_min_values.add(23);
-        max_min_values.add(22);
-        last_values.put(LocalDate.now(),max_min_values);
-
-        assertEquals(last_values , iot.mostra_ultimos_dias(0,2));
-
-    }*/
 }
