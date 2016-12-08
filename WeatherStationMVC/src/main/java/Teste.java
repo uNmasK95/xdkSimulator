@@ -24,10 +24,11 @@ public class Teste {
 
         //Model
         WeatherView view = new WeatherView();
-        WeatherModel wm = new WeatherModel();
+        WeatherModel wm = new WeatherModel(view);
 
         //Controller
-        WeatherStation iot = new WeatherStation(wm);
+        WeatherStation iot = new WeatherStation(wm,view);
+        view.setStation(iot);
 
         // XDK
         XDK xdk1 = new XDK(iot,1);
@@ -46,6 +47,17 @@ public class Teste {
         wv.mostra_humidade();
         wv.mostra_media(LocalDate.now(),WeatherModel.idTemperatura);
         wv.mostra_ultimos_dias(WeatherModel.idTemperatura,2);
+
+        iot.mostra_temperatura_station();
+        iot.mostra_max_minimo_station(LocalDate.now(), WeatherModel.idTemperatura);
+        iot.mostra_max_minimo_station(LocalDate.now(), WeatherModel.idHumidade);
+        iot.mostra_max_minimo_station(LocalDate.now(), WeatherModel.idPressao_atm);
+        iot.mostra_max_minimo_station(LocalDate.now(), WeatherModel.idAudio);
+        iot.mostra_max_minimo_station(LocalDate.now(), WeatherModel.idLuminosidade);
+        iot.mostra_presao_atm_station();
+        iot.mostra_humidade_station();
+        iot.mostra_media_station(LocalDate.now(),WeatherModel.idTemperatura);
+        iot.mostra_ultimos_dias_station(WeatherModel.idTemperatura,2);
 
     }
 

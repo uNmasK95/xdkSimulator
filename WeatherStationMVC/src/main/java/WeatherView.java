@@ -5,8 +5,13 @@ import java.time.LocalDate;
  */
 public class WeatherView {
 
-
     private WeatherStation station;
+
+    public WeatherView (){
+    }
+    public void setStation (WeatherStation station){
+        this.station=station;
+    }
 
     public WeatherView(WeatherStation w){
         this.station = w;

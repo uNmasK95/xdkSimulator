@@ -109,7 +109,7 @@ public class WeatherStation implements WeatherObserver {
         return "";
     }
 
-    public void mostra_media_temperatura_station(LocalDate date, int sensor){
+    public void mostra_media_station(LocalDate date, int sensor){
         weatherView.mostra_media(date,sensor);
     }
 
@@ -118,10 +118,6 @@ public class WeatherStation implements WeatherObserver {
             return "Média humidade: " + mostra_media_generico(data, weatherModel.getHumidade());
         }
         return "";
-    }
-
-    public void mostra_media_humidade_station(LocalDate date, int sensor){
-        weatherView.mostra_media(date,sensor);
     }
 
     private int mostra_media_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
