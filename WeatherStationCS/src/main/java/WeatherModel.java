@@ -53,7 +53,7 @@ public class WeatherModel {
             updateXDKsensor(values.elementAt(idLuminosidade), this.luminosidade);
         }
     }
-    // VERIFICAR SE PODEMOS ALTERAR O METODO DE ADD DELE.
+
     private void updateXDKsensor(Integer value, HashMap<LocalDate,Vector<Integer>> sensor_historico ){
         if (sensor_historico.get(LocalDate.now()) != null){
             Vector<Integer> val_temp = sensor_historico.get(LocalDate.now());
@@ -65,23 +65,6 @@ public class WeatherModel {
             sensor_historico.put(LocalDate.now(), new_vector);
         }
     }
-
-    public int getIdTemperatura(){
-        return idTemperatura;
-    }
-    public int getIdHumidade(){
-        return idHumidade;
-    }
-    public int getIdPressao_atm(){
-        return idPressao_atm;
-    }
-    public int getIdAudio(){
-        return idAudio;
-    }
-    public int getIdLuminosidade(){
-        return idLuminosidade;
-    }
-
 
     public HashMap<LocalDate, Vector<Integer>> getTemperatura() {
         return temperatura;
