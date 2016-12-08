@@ -9,12 +9,6 @@ import java.util.Vector;
 public class WeatherModel {
 
     private WeatherView weatherView;
-=======
- * Created by pedro on 01-12-2016.
- */
-public class WeatherModel {
-
->>>>>>> origin/master
 
     public static final int idTemperatura = 0;
     public static final int idHumidade = 1;
@@ -37,14 +31,9 @@ public class WeatherModel {
     HashMap<LocalDate,Vector<Integer>> audio;
     HashMap<LocalDate,Vector<Integer>> luminosidade;
 
-<<<<<<< HEAD
     public WeatherModel(WeatherView weatherView) {
 
         this.weatherView = weatherView;
-=======
-    public WeatherModel() {
-
->>>>>>> origin/master
         this.humidade = new HashMap<LocalDate,Vector<Integer>>();
         this.temperatura = new HashMap<LocalDate,Vector<Integer>>();
         this.audio = new HashMap<LocalDate,Vector<Integer>>();
@@ -65,11 +54,8 @@ public class WeatherModel {
             updateXDKsensor(values.elementAt(idAudio), this.audio);
 
             updateXDKsensor(values.elementAt(idLuminosidade), this.luminosidade);
-<<<<<<< HEAD
 
             this.weatherView.updateValues("Temperatura: "+values.elementAt(idTemperatura)+", Humidade: "+ values.elementAt(idHumidade)+", Pressão Atm: "+values.elementAt(idPressao_atm)+", Audio: "+values.elementAt(idAudio)+", Luminosidade: "+values.elementAt(idLuminosidade));
-=======
->>>>>>> origin/master
         }
     }
 
@@ -104,8 +90,4 @@ public class WeatherModel {
     public HashMap<LocalDate, Vector<Integer>> getLuminosidade() {
         return luminosidade;
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 }
