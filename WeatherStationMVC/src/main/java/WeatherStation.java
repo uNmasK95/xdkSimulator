@@ -10,34 +10,12 @@ import java.util.Vector;
 public class WeatherStation implements WeatherObserver {
 
 
-    public static final int idTemperatura = 0;
-    public static final int idHumidade = 1;
-    public static final int idPressao_atm = 2;
-    public static final int idAudio = 3;
-    public static final int idLuminosidade = 4;
+    private WeatherModel weatherModel;
+    private WeatherView weatherView;
 
-    /**  Data objects
-     *
-     * Registos do valor de temperaturas
-     * Registos do valor de humidade
-     * Registos do valor de pressão atmosférica
-     * Registos de audio
-     * Registos de luminosidade
-     * */
-
-    HashMap<LocalDate,Vector<Integer>> temperatura;
-    HashMap<LocalDate,Vector<Integer>> humidade;
-    HashMap<LocalDate,Vector<Integer>> pressao_atm;
-    HashMap<LocalDate,Vector<Integer>> audio;
-    HashMap<LocalDate,Vector<Integer>> luminosidade;
-
-    public WeatherStation() {
-
-        this.humidade = new HashMap<LocalDate,Vector<Integer>>();
-        this.temperatura = new HashMap<LocalDate,Vector<Integer>>();
-        this.audio = new HashMap<LocalDate,Vector<Integer>>();
-        this.luminosidade = new HashMap<LocalDate,Vector<Integer>>();
-        this.pressao_atm = new HashMap<LocalDate,Vector<Integer>>();
+    public WeatherStation(WeatherModel weatherModel, WeatherView weatherView) {
+        this.weatherModel = weatherModel;
+        this.weatherView = weatherView;
     }
 
     /**
@@ -53,33 +31,7 @@ public class WeatherStation implements WeatherObserver {
      */
     @Override
     public void update(int id, Vector<Integer> values){
-
-        if(id == 1) {
-
-            updateXDKsensor(values.elementAt(idTemperatura), this.temperatura);
-
-            updateXDKsensor(values.elementAt(idHumidade), this.humidade);
-
-            updateXDKsensor(values.elementAt(idPressao_atm), this.pressao_atm);
-
-            updateXDKsensor(values.elementAt(idAudio), this.audio);
-
-            updateXDKsensor(values.elementAt(idLuminosidade), this.luminosidade);
-        }
-    }
-
-
-    // VERIFICAR SE PODEMOS ALTERAR O METODO DE ADD DELE.
-    private void updateXDKsensor(Integer value, HashMap<LocalDate,Vector<Integer>> sensor_historico ){
-        if (sensor_historico.get(LocalDate.now()) != null){
-            Vector<Integer> val_temp = sensor_historico.get(LocalDate.now());
-            val_temp.add(value);
-        } else
-        {
-            Vector<Integer> new_vector  =  new Vector<Integer>();
-            new_vector.add(value);
-            sensor_historico.put(LocalDate.now(), new_vector);
-        }
+        weatherModel.update(id,values);
     }
 
     /**
@@ -97,54 +49,79 @@ public class WeatherStation implements WeatherObserver {
         return i;
     }
 
-    public int mostra_temperatura(){
-        return mostrar(this.temperatura);
+    public String mostra_temperatura(){
+        return  "Tempertura Actual: " + mostrar(weatherModel.getTemperatura());
     }
 
-    public int mostra_humidade(){
-        return mostrar(this.humidade);
+    public String mostra_humidade(){
+        return "Humidade Actual: " + mostrar(weatherModel.getHumidade());
     }
 
-    public int mostra_presao_atm(){
-        return mostrar(this.pressao_atm);
+    public String mostra_presao_atm(){
+        return "pressao atmosférica actual: " + mostrar(weatherModel.getPressao_atm());
     }
 
-    public int  mostra_audio(){
-        return mostrar(this.audio);
+    public String mostra_audio(){
+
+        return "Audio actual: " + mostrar(weatherModel.getAudio());
     }
 
-    public int mostra_luminusidade(){
-        return mostrar(this.luminosidade);
+    public String mostra_luminusidade(){
+        return "Luminosidade actual: " + mostrar(weatherModel.getLuminosidade());
+    }
+    public void mostra_temperatura_station(){
+        weatherView.mostra_temperatura();
     }
 
+    public void mostra_humidade_station(){
+        weatherView.mostra_luminusidade();
+    }
+
+    public void mostra_presao_atm_station(){
+        weatherView.mostra_luminusidade();
+    }
+
+    public void mostra_audio_station(){
+        weatherView.mostra_luminusidade();
+    }
+    public void mostra_luminusidade_station(){
+        weatherView.mostra_luminusidade();
+    }
     /**
      * Funcionalidade: mostra a média da temperatura para um determinado dia
      * @param data dia a considerar para a média
      * @param sensor sensor a calcular: 0 temperatura
      */
-
     public String mostra_media(LocalDate data, int sensor){
         switch (sensor) {
-            case idTemperatura:
+            case WeatherModel.idTemperatura:
                 return mostra_media_temperatura(data);
-            case idHumidade:
+            case WeatherModel.idHumidade:
                 return mostra_media_humidade(data);
         }
-        return null;
+        return "";
     }
 
     private String mostra_media_temperatura(LocalDate data){
-        if (false != this.temperatura.containsKey(data)) {
-            return "Média temperatura: " + mostra_media_generico(data, this.temperatura);
+        if (false != weatherModel.getTemperatura().containsKey(data)) {
+            return "Média temperatura: " + mostra_media_generico(data, weatherModel.getTemperatura());
         }
-        return null;
+        return "";
+    }
+
+    public void mostra_media_temperatura_station(LocalDate date, int sensor){
+        weatherView.mostra_media(date,sensor);
     }
 
     private String mostra_media_humidade(LocalDate data){
-        if (false != this.humidade.containsKey(data)) {
-            return "Média humidade: " + mostra_media_generico(data, this.humidade);
+        if (false != weatherModel.getHumidade().containsKey(data)) {
+            return "Média humidade: " + mostra_media_generico(data, weatherModel.getHumidade());
         }
-        return null;
+        return "";
+    }
+
+    public void mostra_media_humidade_station(LocalDate date, int sensor){
+        weatherView.mostra_media(date,sensor);
     }
 
     private int mostra_media_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
@@ -160,37 +137,49 @@ public class WeatherStation implements WeatherObserver {
      * @param data dia a considerar para recolher o valor máximo e minímo
      * @param sensor valor do sensor a recolher: temperatura, humidade, pressão atm, audio, luminosidade
      */
+    public void mostra_max_minimo_station(LocalDate data, int sensor){
+        weatherView.mostra_max_minimo(data,sensor);
+    }
+
     public String  mostra_max_minimo(LocalDate data, int sensor){
+        final int MAX = 0;
+        final int MIN = 1;
+
         switch (sensor) {
-            case idTemperatura: //temperatura
-                if ( false != this.temperatura.containsKey(data)){
-                    return "Max temperatura: "+ mostra_max_minimo_generico(data,this.temperatura)[0] +" Min temperatura: "+ mostra_max_minimo_generico(data,this.temperatura)[1];
+            case WeatherModel.idTemperatura: //temperatura
+                if ( false != weatherModel.getTemperatura().containsKey(data)){
+                    return "Max temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[MAX] +
+                            " Min temperatura: "+ mostra_max_minimo_generico(data,weatherModel.getTemperatura())[MIN];
                 }
                 break;
-            case idHumidade: //humidade
-                if ( false != this.humidade.containsKey(data)){
-                    return "Max humidade: "+mostra_max_minimo_generico(data,this.humidade)[0]+" Min humidade: "+mostra_max_minimo_generico(data,this.humidade)[1];
+            case WeatherModel.idHumidade: //humidade
+                if ( false != weatherModel.getHumidade().containsKey(data)){
+                    return "Max humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[MAX]+
+                            " Min humidade: "+mostra_max_minimo_generico(data,weatherModel.getHumidade())[MIN];
                 }
                 break;
-            case idPressao_atm: //pressão atmosférica
-                if ( false != this.pressao_atm.containsKey(data)){
-                    return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,this.pressao_atm)[0]+" Min pressão atmosférica: "+mostra_max_minimo_generico(data,this.pressao_atm)[1];
+            case WeatherModel.idPressao_atm: //pressão atmosférica
+                if ( false != weatherModel.getPressao_atm().containsKey(data)){
+                    return "Max pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[MAX]+
+                            " Min pressão atmosférica: "+mostra_max_minimo_generico(data,weatherModel.getPressao_atm())[MIN];
                 }
                 break;
-            case idAudio: //audio
-                if ( false != this.audio.containsKey(data)){
-                    return "Max Audio: "+ mostra_max_minimo_generico(data,this.audio)[0] +" Min Audio: "+mostra_max_minimo_generico(data,this.audio)[1];
+            case WeatherModel.idAudio: //audio
+                if ( false != weatherModel.getAudio().containsKey(data)){
+                    return "Max Audio: "+ mostra_max_minimo_generico(data,weatherModel.getAudio())[MAX] +
+                            " Min Audio: "+mostra_max_minimo_generico(data,weatherModel.getAudio())[MIN];
                 }
                 break;
-            case idLuminosidade: //luminosidade
-                if ( false != this.luminosidade.containsKey(data)){
-                    return "Max Luminosidade: "+mostra_max_minimo_generico(data,this.luminosidade)[0]+" Min Luminosidade: "+mostra_max_minimo_generico(data,this.luminosidade)[1];
+            case WeatherModel.idLuminosidade: //luminosidade
+                if ( false !=  weatherModel.getLuminosidade().containsKey(data)){
+                    return "Max Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[MAX]+
+                            " Min Luminosidade: "+mostra_max_minimo_generico(data,weatherModel.getLuminosidade())[MIN];
                 }
                 break;
             default:
                 break;
         }
-        return null;
+        return "";
     }
 
     private Integer[] mostra_max_minimo_generico(LocalDate data, HashMap<LocalDate,Vector<Integer>> sensor_historico){
@@ -205,18 +194,18 @@ public class WeatherStation implements WeatherObserver {
      * @param sensor sensor a mostrar
      * @param dias numero de dias a considerar desde a leitura mais actual.
      */
-    public Map<LocalDate, Vector<Integer>> mostra_ultimos_dias(int sensor, int dias) {
+    public String mostra_ultimos_dias(int sensor, int dias) {
 
         int dias_counter = dias-1;
         HashMap<LocalDate, Vector<Integer>> last_values = new HashMap<LocalDate, Vector<Integer>>();
         Vector max_min_values = new Vector();
 
-        if(sensor==idTemperatura){
+        if(sensor==WeatherModel.idTemperatura){
             LocalDate today = LocalDate.now();
             while (dias_counter >= 0) {
 
-                if (false != this.temperatura.containsKey(today.minusDays(dias_counter))) {
-                    Vector<Integer> temp_values = this.temperatura.get(today.minusDays(dias_counter));
+                if (false != weatherModel.getTemperatura().containsKey(today.minusDays(dias_counter))) {
+                    Vector<Integer> temp_values = weatherModel.getTemperatura().get(today.minusDays(dias_counter));
                     max_min_values.add(Collections.max(temp_values));
                     max_min_values.add(Collections.min(temp_values));
                     last_values.put(today.minusDays(dias_counter), max_min_values);
@@ -225,7 +214,11 @@ public class WeatherStation implements WeatherObserver {
                 dias_counter -= 1;
             }
         }
-        return last_values;
+        return "Valores máximos e mínimos: " + last_values.toString();
+    }
+
+    public void mostra_ultimos_dias_station(int sensor, int dias){
+        weatherView.mostra_ultimos_dias(sensor,dias);
     }
 
 }
