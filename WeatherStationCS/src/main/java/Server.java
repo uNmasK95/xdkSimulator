@@ -14,10 +14,10 @@ import java.util.Vector;
 
 public class Server {
 
-    public Server(int port, WeatherStationInf ws) {
+    public Server(int port, String name, WeatherStationInf ws) {
         try {
             Registry registry = LocateRegistry.getRegistry(port);
-            registry.rebind(WeatherStationInf.NAME,ws);
+            registry.rebind(name,ws);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
@@ -47,6 +47,6 @@ public class Server {
         xdk1.start(xdk1_reading_1);
         xdk1.start(xdk1_reading_2);
 
-        Server s = new Server(12345,wStation);
+        Server s = new Server(12345,"WeatherStation1",wStation);
     }
 }
