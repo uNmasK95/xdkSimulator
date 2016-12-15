@@ -13,10 +13,10 @@ public class Client {
 
     private WeatherStationInf ws;
 
-    public Client(int port) {
+    public Client(int port,String name) {
         try {
             Registry registry = LocateRegistry.getRegistry(port);
-            this.ws = (WeatherStationInf) registry.lookup(WeatherStationInf.NAME);
+            this.ws = (WeatherStationInf) registry.lookup(name);
         } catch (NotBoundException | RemoteException e) {
             e.printStackTrace();
         }
@@ -55,7 +55,7 @@ public class Client {
     }
 
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-        Client c1 = new Client(12345);
+        Client c1 = new Client(12345,"WeatherStation1");
 
         c1.mostra_temperatura();
 
